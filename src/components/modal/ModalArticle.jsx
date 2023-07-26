@@ -1,21 +1,20 @@
-import { Modal } from 'antd';
 import React from 'react';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { modalState } from '../../recoil/atoms/States';
+import { Modal } from 'antd';
 
 const ModalArticle = () => {
-    const setIsOpen = useSetRecoilState(modalState);
+    const [isOpen, setIsOpen] = useRecoilState(modalState);
 
-    const onClose = () => {
-        setIsOpen((prev) => {
-            return { ...prev, isOpen: false}
-        })
-    }
+
+    const closeModal = () => {
+      setIsOpen(false)
+    };
 
     return (
         <>
-            <Modal title="test" onCancel={onClose}>
-                <p>someday..</p>
+            <Modal title='test맨이야' open={isOpen} onOk={closeModal} onCancel={closeModal}>
+                <p>sometime</p>
             </Modal>
         </>
     );
