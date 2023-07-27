@@ -1,9 +1,9 @@
 import React from 'react';
 import { useSetRecoilState } from 'recoil';
-import { modalState } from '../../recoil/atoms/States';
+import { modalState } from '../../recoil/atoms/common/states';
 import { Button } from 'antd';
 
-const ModalOpener = () => {
+const ModalOpener = (props) => {
     const setIsOpen = useSetRecoilState(modalState);
 
     const openModal = () => {
@@ -13,7 +13,7 @@ const ModalOpener = () => {
     return (
         <>
             <Button type='primary' onClick={openModal}>
-                프롭스 값?
+                {props.btnTitle}
             </Button>
         </>
     );
