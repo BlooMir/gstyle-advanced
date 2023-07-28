@@ -1,5 +1,10 @@
 import { atom } from "recoil"
 
-export const survey = atom({
-    
+export const surveyDataState = atom ({
+
+})
+
+export const menuSurveyDataState = atom({
+    key : `menuSurveyDataState`,
+    default : []
 })
