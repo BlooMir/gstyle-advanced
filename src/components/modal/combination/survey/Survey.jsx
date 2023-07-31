@@ -1,20 +1,19 @@
 import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Form, Input, Radio, Button } from 'antd';
-import { useRecoilValue } from 'recoil';
-import { todayMenuState } from '../../../../recoil/atoms/common/states';
+import { useMenuStore } from '../../../../stores/menu/menu';
 import EachMenuform from './EachMenuform';
 
 
 const Survey = () => {
-    // Recoil로 오늘의 메뉴 "값만" 가져오기
-    const menu = useRecoilValue(todayMenuState);
+    // 오늘의 메뉴 값 불러오기
+    const { todayMenu } = useMenuStore();
 
     // react-hook-form 을 통한 form 관리
     const { control, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = (data) => {
-        console.log(data)
+        console.log(data);
       };
   
     return (
@@ -64,15 +63,18 @@ const Survey = () => {
             </Form.Item>
             {/* 급식 만족도 입력 끝 */}
             {/* 메뉴별 급식 만족도 입력 시작 */}
+
             <Form.Item
                 label="3. 메뉴별 급식 만족도"
             >
-                {menu.map((menuName) => (
+                {todayMenu.menus.map((menuName, index) => (
                     <EachMenuform
                         menuName={menuName}
-                        />
+                        key={index}
+                    />
                 ))}
             </Form.Item>
+
             {/* 메뉴별 급식 만족도 입력 끝 */}
             <Form.Item>
                 <Button type="primary" htmlType="submit">제출</Button>

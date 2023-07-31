@@ -1,11 +1,12 @@
 import React from 'react';
-import { useSetRecoilState } from 'recoil';
-import { modalState } from '../../recoil/atoms/common/states';
 import { Button } from 'antd';
+import { useModalStore } from '../../stores/common/common';
 
-const ModalOpener = (props) => {
-    const setIsOpen = useSetRecoilState(modalState);
+const ModalOpener = ({btnTitle}) => {
+    // zustand 모달 오픈 Boolean 값 set함수 (src -> stores -> common -> common.js)
+    const { setIsOpen }  = useModalStore();
 
+    // 모달 오픈 함수 (setIsOpen을 true로)
     const openModal = () => {
         setIsOpen(true)
       };
@@ -13,7 +14,7 @@ const ModalOpener = (props) => {
     return (
         <>
             <Button type='primary' onClick={openModal}>
-                {props.btnTitle}
+                {btnTitle}
             </Button>
         </>
     );

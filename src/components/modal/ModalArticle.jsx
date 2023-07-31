@@ -1,10 +1,9 @@
 import React from 'react';
-import { useRecoilState } from 'recoil';
-import { modalState } from '../../recoil/atoms/common/states';
 import { Modal } from 'antd';
+import { useModalStore } from '../../stores/common/common';
 
 const ModalArticle = ({ModalTitle, ModalOk, children}) => {
-    const [isOpen, setIsOpen] = useRecoilState(modalState);
+    const { isOpen, setIsOpen } = useModalStore();
 
 
     const closeModal = () => {
