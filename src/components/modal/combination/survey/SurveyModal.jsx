@@ -2,7 +2,7 @@ import React from 'react';
 import ModalOpener from '../../ModalOpener';
 import ModalArticle from '../../ModalArticle';
 import { TODAY_SERVER_MODAL_TITLE } from '../../../../constants/constans';
-import Survey from './Survey';
+import Survey from '../survey/elements/Survey';
 
 const SurveyModal = () => {
 

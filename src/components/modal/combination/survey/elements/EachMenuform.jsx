@@ -4,7 +4,7 @@ import { useForm, Controller } from 'react-hook-form';
 const EachMenuform = ({menuName}) => {
 
     const { control, handleSubmit, formState: { errors } } = useForm();
-
+    
     return (
         <Form.Item
                 label={menuName}

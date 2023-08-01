@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Form, Input, Radio, Button } from 'antd';
-import { useMenuStore } from '../../../../stores/menu/menu';
+import { useMenuStore } from '../../../../../stores/menu/menu';
 import EachMenuform from './EachMenuform';
 
 
@@ -17,6 +17,7 @@ const Survey = () => {
       };
   
     return (
+        // 폼 입력 시작
         <Form 
             onFinish={handleSubmit(onSubmit)}
             layout='vertical'
@@ -41,6 +42,7 @@ const Survey = () => {
                 />
             </Form.Item>
             {/* 학번 입력 끝 */}
+
             {/* 급식 만족도 입력 시작 */}
             <Form.Item
                 label="2. 오늘의 급식 만족도"
@@ -62,11 +64,12 @@ const Survey = () => {
                 />
             </Form.Item>
             {/* 급식 만족도 입력 끝 */}
-            {/* 메뉴별 급식 만족도 입력 시작 */}
 
+            {/* 메뉴별 급식 만족도 입력 시작 */}
             <Form.Item
                 label="3. 메뉴별 급식 만족도"
             >
+                {/* EachMenuform 컴포넌트를 todayMenu 배열 인덱스 만큼 렌더링 */}
                 {todayMenu.menus.map((menuName, index) => (
                     <EachMenuform
                         menuName={menuName}
@@ -74,8 +77,8 @@ const Survey = () => {
                     />
                 ))}
             </Form.Item>
-
             {/* 메뉴별 급식 만족도 입력 끝 */}
+
             <Form.Item>
                 <Button type="primary" htmlType="submit">제출</Button>
             </Form.Item>
