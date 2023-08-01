@@ -3,7 +3,7 @@ import { Form, Radio, Select } from 'antd';
 import { useForm, Controller } from 'react-hook-form';
 const EachMenuform = ({menuName}) => {
 
-    const { control, handleSubmit, formState: { errors } } = useForm();
+    const { control, formState: { errors } } = useForm();
     
     return (
         <Form.Item
