@@ -1,18 +1,15 @@
 import React from 'react';
-import { useForm, Controller } from 'react-hook-form';
-import { Form, Input, Radio, Button, Modal, Space } from 'antd';
+import { Form, Input, Radio, Button, Modal, Space, Select } from 'antd';
 import { useMenuStore } from '../../../../../stores/menu/menu';
 import { useModalStore } from '../../../../../stores/common/common';
-import EachMenuform from './EachMenuform';
 
 
 const Survey = () => {
+    const { todayMenu } = useMenuStore(); 
     // Zustand 모달 Boolean 값/set함수 불러오기
     const { isOpen, setIsOpen } = useModalStore();
     // 모달 닫기
     const closeModal = () => setIsOpen(false);
-    // react-hook-form 을 통한 form 관리
-    const { control, handleSubmit, formState: { errors } } = useForm();
 
 
     // 폼 데이터 처리 구문
@@ -30,53 +27,62 @@ const Survey = () => {
             footer={null}
         >
             {/* 폼 입력 시작 */}
-            <Form layout='vertical' onFinish={handleSubmit(onSubmit)}>
+            <Form layout='vertical' onFinish={onSubmit}>
+
                 {/* 학번 입력 시작*/}
                 <Form.Item
                     label="1. 학번을 입력해주세요"
-                    help={errors.stuno && errors.stuno.message}
-                    validateStatus={errors.stuno ? 'error' : ''}
+                    name='stuno'
+                    rules={[{ required: true, message: '학번을 입력해주세요.' }]}
                 >
-                    <Controller
-                        name="stuno"
-                        control={control}
-                        rules={{
-                            required: '학번을 입력해주세요.',
-                            pattern: {
-                            value: /^[0-9]{1,5}$/,
-                            message: '학번은 숫자만 입력 가능하며, 5자리 이하여야합니다.'
-                            }
-                        }}
-                        render={({ field }) => <Input {...field} type="number"/>}
-                    />
+                    <Input type="number"/>
                 </Form.Item>
                 {/* 학번 입력 끝 */}
 
                 {/* 급식 만족도 입력 시작 */}
                 <Form.Item
                     label="2. 오늘의 급식 만족도"
-                    help={errors.erating && errors.erating.message}
-                    validateStatus={errors.erating ? 'error' : ''}
+                    name='erating'
+                    rules={[{ required: true, message: '전체적인 급식 만족도를 선택해주세요.' }]}
                 >
-                    <Controller
-                    name="erating"
-                    control={control}
-                    rules={{ required: '급식 만족도를 선택해주세요.' }}
-                    render={({ field }) => (
-                        <Radio.Group {...field} buttonStyle='solid'>
-                        <Radio.Button value="매우나쁨">매우나쁨</Radio.Button>
-                        <Radio.Button value="나쁨">나쁨</Radio.Button>
-                        <Radio.Button value="좋음">좋음</Radio.Button>
-                        <Radio.Button value="매우좋음">매우좋음</Radio.Button>
-                        </Radio.Group>
-                    )}
-                    />
+                    <Radio.Group buttonStyle='solid'>
+                    <Radio.Button value="매우나쁨">매우나쁨</Radio.Button>
+                    <Radio.Button value="나쁨">나쁨</Radio.Button>
+                    <Radio.Button value="좋음">좋음</Radio.Button>
+                    <Radio.Button value="매우좋음">매우좋음</Radio.Button>
+                    </Radio.Group>
                 </Form.Item>
                 {/* 급식 만족도 입력 끝 */}
 
-                {/* 메뉴별 급식 만족도 입력 시작 */}
-                <div>3. 메뉴별 급식 만족도</div>
 
+                {/* 메뉴별 급식 만족도 입력 시작 */}
+                <label>3. 메뉴별 급식 만족도</label>
+                {todayMenu.menus.map((menu, index) => (
+                    <div key={index}>
+                        <Form.Item 
+                            label={menu} 
+                            name={['menuSatis', index]}
+                            rules={[{ required: true, message: '메뉴 만족도를 선택해주세요.' }]}
+                        >
+                            <Radio.Group buttonStyle='solid'>
+                            <Radio.Button value="매우나쁨">매우나쁨</Radio.Button>
+                            <Radio.Button value="나쁨">나쁨</Radio.Button>
+                            <Radio.Button value="좋음">좋음</Radio.Button>
+                            <Radio.Button value="매우좋음">매우좋음</Radio.Button>
+                            </Radio.Group>
+                        </Form.Item>
+
+                        <Form.Item 
+                            name={['additionalInfo', index]} 
+                            rules={[{ required: true, message: '이유를 선택해주세요.' }]}>
+                            <Select>
+                                <Select.Option value="옵션1">옵션1</Select.Option>
+                                <Select.Option value="옵션2">옵션2</Select.Option>
+                                <Select.Option value="옵션3">옵션3</Select.Option>
+                            </Select>
+                        </Form.Item>
+                    </div>
+                ))}
                 {/* 메뉴별 급식 만족도 입력 끝 */}
 
                 {/* 제출 버튼 */}
