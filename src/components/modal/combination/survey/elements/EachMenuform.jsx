@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form, Radio, Select } from 'antd';
 import { useForm, Controller } from 'react-hook-form';
+import { MENU_BAD_RATING_REASON_LIST, MENU_GOOD_RATING_REASON_LIST } from '../../../../../constants/constans';
 const EachMenuform = ({menuName}) => {
 
     const { control, formState: { errors } } = useForm();
@@ -25,20 +26,10 @@ const EachMenuform = ({menuName}) => {
                 )}
                 />
                 <Select
-                    options={[
-                        { value: '양이 적당했다', label: '양이 적당했다' },
-                        { value: '간이 맞았다', label: '간이 맞았다' },
-                        { value: '맛있었다', label: '맛있었다' },
-                        { value: '좋아하는 음식이였다', label: '좋아하는 음식이였다' }
-                    ]}
+                    options={MENU_GOOD_RATING_REASON_LIST}
                 />
                 <Select
-                    options={[
-                        { value: '너무 싱거웠다', label: '너무 싱거웠다' },
-                        { value: '너무 짰다', label: '너무 짰다' },
-                        { value: '양이 적었다', label: '양이 적었다' },
-                        { value: '안좋아하는 음식이다', label: '안좋아하는 음식이다' }
-                      ]}
+                    options={MENU_BAD_RATING_REASON_LIST}
                 />
             </Form.Item>
     );
