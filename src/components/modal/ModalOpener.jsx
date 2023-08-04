@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from '../../assets/css/survey.module.css'
 import { Button } from 'antd';
 import { useModalStore } from '../../stores/common/common';
 
@@ -13,7 +14,7 @@ const ModalOpener = ({btnTitle}) => {
 
     return (
         <>
-            <Button type='primary' onClick={openModal}>
+            <Button className={styles.surveyModalBtn} type='primary' onClick={openModal}>
                 {btnTitle}
             </Button>
         </>

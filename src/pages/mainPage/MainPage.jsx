@@ -4,6 +4,14 @@ import dayjs from "dayjs";
 import { useQuery } from 'react-query';
 import { fetchMonthMeal } from '../../container/api/api';
 import { useMenuStore } from '../../stores/menu/menu';
+import { styled } from 'styled-components';
+import WeekMealList from '../../components/weekMealList/WeekMealList';
+
+const MainPageDiv = styled.div`
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+`
 
 const MainPage = () => {
     // 오늘 날짜 찾기
@@ -16,7 +24,6 @@ const MainPage = () => {
     // React query로 값 불러오기 , onSuccess 콜백 함수 사용
     const { isLoading, isError, error } = useQuery(`MonthMealMenus` , fetchMonthMeal, {
         refetchOnWindowFocus: false,
-
         onSuccess: (data) =>{
             // 오늘 날짜가 들어있는 배열값 index 찾기
             const todayIndex = data.findIndex((element) => element.lunchDate === dummyDate);
@@ -26,15 +33,15 @@ const MainPage = () => {
             setMonthMenu(data);
         }
     });
-
     if(isLoading) return `로딩중` // 서버 값 로딩 중 렌더링
     if(isError) return `An error has occurred: ` + error.message // 에러뜨면
 
     
     return (
-        <>
+        <MainPageDiv>
+            <WeekMealList/>
             <SurveyModal/>
-        </>
+        </MainPageDiv>
     );
 };
 
