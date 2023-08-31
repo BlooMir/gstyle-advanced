@@ -13,11 +13,11 @@ const ModalOpener = ({btnTitle}) => {
       };
 
     return (
-        <>
-            <Button className={styles.surveyModalBtn} type='primary' onClick={openModal}>
+        <div className={styles.surveyModalBtnWrapper}>
+            <Button className={styles.surveyModalBtn} type='default' onClick={openModal}>
                 {btnTitle}
             </Button>
-        </>
+        </div>
     );
 };
 

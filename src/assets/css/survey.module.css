@@ -1,4 +1,13 @@
+.surveyModalBtnWrapper{
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
 .surveyModalBtn{
-    width: 90vw;
-    height: 3rem;
+    width: 95vw;
+    height: 4rem;
+    font-size: 25px;
+    font-weight: bold;
+    border-radius: 5px;
+    background-color: #FFC737;
 }
