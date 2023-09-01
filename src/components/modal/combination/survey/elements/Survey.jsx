@@ -8,10 +8,12 @@ import axios from 'axios';
 
 
 const Survey = () => {
-    // 오늘의 메뉴 불러오기
+    // 오늘의 메뉴 정보 불러오기
     const { todayMenu } = useMenuStore(); 
+
     // Zustand 모달 Boolean 값/set함수 불러오기
     const { isOpen, setIsOpen } = useModalStore();
+
     // 모달 닫기
     const closeModal = () => setIsOpen(false);
 
@@ -30,7 +32,7 @@ const Survey = () => {
 
     return (
         <Modal 
-            title="test"
+            title={`${todayMenu.lunchDate} 설문조사`}
             open={isOpen}
             onCancel={closeModal}
             maskClosable={false}
@@ -78,6 +80,7 @@ const Survey = () => {
                 {todayMenu.menus.map((menu, index) => (
                     <div key={index}>
                         <span>{menu}</span>
+
                         <Form.Item 
                             name={['mrating', index]}
                             rules={[{ required: true, message: '메뉴 만족도를 선택해주세요.' }]}
@@ -89,6 +92,7 @@ const Survey = () => {
                                 <Radio.Button value={menu + "_매우좋음_"}>매우좋음</Radio.Button>
                             </Radio.Group>
                         </Form.Item>
+                        
                         <Form.Item 
                             name={['mreason', index]} 
                             rules={[{ required: true, message: '이유를 선택해주세요.' }]}

@@ -4,7 +4,6 @@ import { TODAY_SERVER_MODAL_TITLE } from '../../../../constants/constans';
 import Survey from '../survey/elements/Survey';
 
 const SurveyModal = () => {
-
     return (
         <>
             <ModalOpener btnTitle={TODAY_SERVER_MODAL_TITLE}/>

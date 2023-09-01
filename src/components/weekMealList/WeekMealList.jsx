@@ -18,7 +18,7 @@ const WeekMenuWrapper = styled.div`
         font-size: 15px;
     }
 `
-const weekMenu = {
+const thisWeekMenu = {
     Monday: null,
     Tuesday: null,
     Wednesday: null,
@@ -28,31 +28,31 @@ const weekMenu = {
 
 const WeekMealList = () => {
     // 주간 급식 정보 불러오기
-    const { thisWeekMenu } = useMenuStore(); 
+    const { weekMenu } = useMenuStore(); 
     // 오늘은 무슨 요일?
     const todayIs = dayjs().day() - 1 ;
 
-    if (thisWeekMenu.length > 0) {
-        thisWeekMenu.forEach((menuObj) => {
+    if (weekMenu.length > 0) {
+        weekMenu.forEach((menuObj) => {
           // 각 요일의 lunchDate을 dayjs로 변환하여 요일을 얻음
           const dayOfWeek = dayjs(menuObj.lunchDate).day();
       
           // 요일에 따라 weekMenu 객체에 메뉴 정보를 할당
           switch (dayOfWeek) {
             case 1:
-              weekMenu.Monday = menuObj.menus;
+              thisWeekMenu.Monday = menuObj.menus;
               break;
             case 2:
-              weekMenu.Tuesday = menuObj.menus;
+              thisWeekMenu.Tuesday = menuObj.menus;
               break;
             case 3:
-              weekMenu.Wednesday = menuObj.menus;
+              thisWeekMenu.Wednesday = menuObj.menus;
               break;
             case 4:
-              weekMenu.Thursday = menuObj.menus;
+              thisWeekMenu.Thursday = menuObj.menus;
               break;
             case 5:
-              weekMenu.Friday = menuObj.menus;
+              thisWeekMenu.Friday = menuObj.menus;
               break;
             default:
               break;
@@ -70,27 +70,27 @@ const WeekMealList = () => {
             <Carousel draggable dots={false} initialSlide={todayIs}>
                 <WeekMenuWrapper>
                     <h1>월요일</h1>
-                    {renderMenu(weekMenu.Monday)}
+                    {renderMenu(thisWeekMenu.Monday)}
                 </WeekMenuWrapper>
 
                 <WeekMenuWrapper>
                     <h1>화요일</h1>
-                    {renderMenu(weekMenu.Tuesday)}
+                    {renderMenu(thisWeekMenu.Tuesday)}
                 </WeekMenuWrapper>
 
                 <WeekMenuWrapper>
                     <h1>수요일</h1>
-                    {renderMenu(weekMenu.Wednesday)}
+                    {renderMenu(thisWeekMenu.Wednesday)}
                 </WeekMenuWrapper>
 
                 <WeekMenuWrapper>
                     <h1>목요일</h1>
-                    {renderMenu(weekMenu.Thursday)}
+                    {renderMenu(thisWeekMenu.Thursday)}
                 </WeekMenuWrapper>
 
                 <WeekMenuWrapper>
                     <h1>금요일</h1>
-                    {renderMenu(weekMenu.Friday)}
+                    {renderMenu(thisWeekMenu.Friday)}
                 </WeekMenuWrapper>
             </Carousel>
     );
